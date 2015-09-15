@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtDebug>
+#include "question.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QList<Question*> questions;
+    void fillText(Question* question);
 };
 
 #endif // MAINWINDOW_H
