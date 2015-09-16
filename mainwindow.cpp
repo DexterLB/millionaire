@@ -16,17 +16,16 @@ MainWindow::MainWindow(QWidget *parent) :
     q->correct_index = 1;
     this->questions << q;
     fillText(q);
-    
+
     this->answers << ui->a;
     this->answers << ui->b;
     this->answers << ui->c;
     this->answers << ui->d;
 
-	QSignalMapper signalMapper = new QSignalMapper(this);
+	QSignalMapper* signalMapper = new QSignalMapper(this);
     for(int i = 0; i < 4; i++){
     	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
     	signalMapper->setMapping(this->answers[i], i);
-	
 	}
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
 }
