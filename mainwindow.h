@@ -24,11 +24,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    int question_index;
     QList<Question*> questions;
-    void fillText(Question* question);
+    void fillText();
     QList<QPushButton*> answers;
     int button_id;
-
+    void renovateColor();
+    void gameOver();
+    void nextQuestion();
+    void winGame();
+    
 private slots:
 	void clicked(int button_id);
     void verified();
