@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     q->answers << text;
     q->answers << text;
     q->answers << text;
-    q->correct_index = 0;
+    q->correct_index = 1;
     this->questions << q;
     fillText(q);
     
@@ -22,11 +22,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->answers << ui->c;
     this->answers << ui->d;
 
-	connect(ui->a, SIGNAL(clicked()), this, SLOT(a_clicked()));
-	connect(ui->b, SIGNAL(clicked()), this, SLOT(b_clicked()));
-	connect(ui->c, SIGNAL(clicked()), this, SLOT(c_clicked()));
-	connect(ui->d, SIGNAL(clicked()), this, SLOT(d_clicked()));
-
+	QSignalMapper signalMapper = new QSignalMapper(this);
+    for(int i = 0; i < 4; i++){
+    	signalMapper->setMapping(this->answers[i], i);
+	
+	}
+    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
 }
 
 
@@ -38,22 +39,12 @@ void MainWindow::fillText(Question* question){
 	ui->d->setText(question->answers[3]);
 }
 
-void MainWindow::a_clicked(){
-	ui->a->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
-	this->answers[this->questions[0]->correct_index]->setStyleSheet(this->answers[this->questions[0]->correct_index] + "border-image:url(:/images/correct.png);");
+void MainWindow::clicked(int button_id){
+	button_id ++;
+	//QApplication::sender()->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
+	//this->answers[this->questions[0]->correct_index]->setStyleSheet(this->answers[this->questions[0]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
 }
 
-void MainWindow::b_clicked(){
-	ui->b->setStyleSheet(ui->b->styleSheet() + "border-image:url(:/images/selected.png);");
-}
-
-void MainWindow::c_clicked(){
-	ui->c->setStyleSheet(ui->c->styleSheet() + "border-image:url(:/images/selected.png);");
-}
-
-void MainWindow::d_clicked(){
-	ui->d->setStyleSheet(ui->d->styleSheet() + "border-image:url(:/images/selected.png);");
-}
 
 MainWindow::~MainWindow()
 {

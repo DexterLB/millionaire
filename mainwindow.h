@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QApplication>
 #include <QPushButton>
+#include <QSignalMapper>
 #include <QtDebug>
 #include "question.h"
 
@@ -25,10 +27,7 @@ private:
     QList<QPushButton*> answers;
 
 private slots:
-	void a_clicked();
-	void b_clicked();
-	void c_clicked();
-	void d_clicked();
+	void clicked(int button_id);
 
 };
 
