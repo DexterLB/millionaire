@@ -19,9 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
     */
 
     QFile file("questions.txt");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString line;
     QTextStream in(&file);
-    Question* q;
+    Question* q = new Question;
     line = in.readLine();
     q->question = line;
     line = in.readLine();
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     q->answers << line;
     line = in.readLine();
     q->correct_index = line.toInt();
+    process_line(line);
     fillText(this->questions[0]);
 
     this->answers << ui->a;
