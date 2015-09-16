@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	QSignalMapper signalMapper = new QSignalMapper(this);
     for(int i = 0; i < 4; i++){
+    	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
     	signalMapper->setMapping(this->answers[i], i);
 	
 	}
