@@ -3,6 +3,8 @@
         <file alias="banner.png">images/banner.png</file>
         <file alias="button.png">images/button.png</file>
         <file alias="question.png">images/question.png</file>
+        <file alias="selected.png">images/selected.png</file>
+        <file alias="correct.png">images/correct.png</file>
         <file alias="background.png">images/background.png</file>
     </qresource>
 </RCC>
