@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QApplication>
+#include <QTimer>
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QtDebug>

@@ -40,9 +40,14 @@ void MainWindow::fillText(Question* question){
 }
 
 void MainWindow::clicked(int button_id){
-	button_id ++;
-	//QApplication::sender()->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
-	//this->answers[this->questions[0]->correct_index]->setStyleSheet(this->answers[this->questions[0]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
+	this->answers[button_id]->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
+	for(int i = 0; i < 4; i++){
+        if(button_id != i){
+            this->answers[i]->setEnabled(false);
+        }
+    }
+    this->answers[this->questions[0]->correct_index]->setStyleSheet(this->answers[this->questions[0]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
+
 }
 
 
