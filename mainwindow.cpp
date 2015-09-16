@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Question* q = new Question;
+    /*Question* q = new Question;
     q->question = "Gs";
     QString text = "edno";
     q->answers << text;
@@ -16,6 +16,25 @@ MainWindow::MainWindow(QWidget *parent) :
     q->correct_index = 1;
     this->questions << q;
     fillText(q);
+    */
+
+    QFile file("questions.txt");
+    QString line;
+    QTextStream in(&file);
+    Question* q;
+    line = in.readLine();
+    q->question = line;
+    line = in.readLine();
+    q->answers << line;
+    line = in.readLine();
+    q->answers << line;
+    line = in.readLine();
+    q->answers << line;
+    line = in.readLine();
+    q->answers << line;
+    line = in.readLine();
+    q->correct_index = line.toInt();
+    fillText(this->questions[0]);
 
     this->answers << ui->a;
     this->answers << ui->b;

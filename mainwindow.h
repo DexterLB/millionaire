@@ -7,6 +7,7 @@
 #include <QSignalMapper>
 #include <QtDebug>
 #include <QTimer>
+#include <QtCore>
 #include "question.h"
 
 namespace Ui {
