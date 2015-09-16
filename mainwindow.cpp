@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->question_index = 0;
 
-    QFile file("questions.txt");
+    QFile file(":/questions/questions.txt");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString line;
     QTextStream in(&file);

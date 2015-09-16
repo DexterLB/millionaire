@@ -7,4 +7,8 @@
         <file alias="correct.png">images/correct.png</file>
         <file alias="background.png">images/background.png</file>
     </qresource>
+
+    <qresource prefix="/questions">
+        <file alias="questions.txt">questions/questions.txt</file>
+    </qresource>
 </RCC>
