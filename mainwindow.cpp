@@ -41,7 +41,8 @@ void MainWindow::fillText(Question* question){
 
 void MainWindow::clicked(int button_id){
 	this->answers[button_id]->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
-	for(int i = 0; i < 4; i++){
+    sleep(4);
+    for(int i = 0; i < 4; i++){
         if(button_id != i){
             this->answers[i]->setEnabled(false);
         }
