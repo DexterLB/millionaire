@@ -41,16 +41,19 @@ void MainWindow::fillText(Question* question){
 
 void MainWindow::clicked(int button_id){
 	this->answers[button_id]->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
-    sleep(4);
+    this->button_id = button_id;
+    QTimer::singleShot(4000, this, SLOT(verified()));
+}
+
+void MainWindow::verified() {
     for(int i = 0; i < 4; i++){
-        if(button_id != i){
+        if(this->button_id != i){
             this->answers[i]->setEnabled(false);
         }
     }
     this->answers[this->questions[0]->correct_index]->setStyleSheet(this->answers[this->questions[0]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
 
 }
-
 
 MainWindow::~MainWindow()
 {

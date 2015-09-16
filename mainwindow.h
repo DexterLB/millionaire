@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QtDebug>
+#include <QTimer>
 #include "question.h"
 
 namespace Ui {
@@ -25,10 +26,11 @@ private:
     QList<Question*> questions;
     void fillText(Question* question);
     QList<QPushButton*> answers;
+    int button_id;
 
 private slots:
 	void clicked(int button_id);
-
+    void verified();
 };
 
 #endif // MAINWINDOW_H
