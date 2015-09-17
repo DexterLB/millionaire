@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->question_index = 0;
 
-    this->select_sound.setSource(QUrl::fromLocalFile(":/sounds/select.mp3"));
-    this->select_sound.setVolume(0.25f);
-    
+    this->select_sound.setSource(QUrl("qrc:/sounds/select.wav"));
+    this->wrong_sound.setSource(QUrl("qrc:/sounds/wrong.wav"));
+
     QFile file(QFileDialog::getOpenFileName(this, "Select a file to open..."));
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString line;
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->answers << ui->d;
 
     fillText();
-	
+
     QSignalMapper* signalMapper = new QSignalMapper(this);
     for(int i = 0; i < 4; i++){
     	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
@@ -70,12 +70,15 @@ void MainWindow::clicked(int button_id){
             this->answers[i]->setEnabled(false);
         }
     }
-    QTimer::singleShot(1000, this, SLOT(verified()));
+    QTimer::singleShot(3000, this, SLOT(verified()));
 }
 
 void MainWindow::verified() {
     this->answers[this->questions[question_index]->correct_index]->setStyleSheet(this->answers[this->questions[question_index]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
-    QTimer::singleShot(1000, this, SLOT(nextQuestion()));
+    if (this->button_id != this->questions[question_index]->correct_index) {
+        this->wrong_sound.play();
+    }
+    QTimer::singleShot(3000, this, SLOT(nextQuestion()));
 }
 
 void MainWindow::nextQuestion(){
@@ -88,7 +91,7 @@ void MainWindow::nextQuestion(){
 }
 
 void MainWindow::winGame(){
-    
+
 }
 
 MainWindow::~MainWindow()

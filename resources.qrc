@@ -14,6 +14,7 @@
     </qresource>
 
     <qresource prefix="/sounds">
-        <file alias="select.mp3">sounds/select.mp3</file>
+        <file alias="select.wav">sounds/select.wav</file>
+        <file alias="wrong.wav">sounds/wrong.wav</file>
     </qresource>
 </RCC>

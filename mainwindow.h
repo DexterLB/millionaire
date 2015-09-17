@@ -28,6 +28,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QSoundEffect select_sound;
+    QSoundEffect wrong_sound;
     int question_index;
     QList<Question*> questions;
     void fillText();
@@ -35,7 +36,7 @@ private:
     int button_id;
     void renovateColor();
     void gameOver();
-    
+
 private slots:
 	void clicked(int button_id);
     void verified();
