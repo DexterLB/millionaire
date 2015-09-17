@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->select_sound.setSource(QUrl("qrc:/sounds/select.wav"));
     this->wrong_sound.setSource(QUrl("qrc:/sounds/wrong.wav"));
+    this->right_sound.setSource(QUrl("qrc:/sounds/right.wav"));
 
 
     this->answers << ui->a;
@@ -88,7 +89,9 @@ void MainWindow::clicked(int button_id){
 
 void MainWindow::verified() {
     this->answers[this->questions[question_index]->correct_index]->setStyleSheet(this->answers[this->questions[question_index]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
-    if (this->button_id != this->questions[question_index]->correct_index) {
+    if (this->button_id == this->questions[question_index]->correct_index) {
+        this->right_sound.play();
+    } else {
         this->wrong_sound.play();
     }
     QTimer::singleShot(3000, this, SLOT(nextQuestion()));
@@ -104,7 +107,8 @@ void MainWindow::nextQuestion(){
 }
 
 void MainWindow::winGame(){
-
+    QMessageBox::information(this, "Yay!", "You win!");
+    this->startGame();
 }
 
 MainWindow::~MainWindow()

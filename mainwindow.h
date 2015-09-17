@@ -9,6 +9,7 @@
 #include <QSoundEffect>
 #include <QTimer>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QtCore>
 #include <QDir>
 #include "question.h"
@@ -29,6 +30,7 @@ private:
     Ui::MainWindow *ui;
     QSoundEffect select_sound;
     QSoundEffect wrong_sound;
+    QSoundEffect right_sound;
     int question_index;
     QList<Question*> questions;
     void fillText();

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Who wants to be a Millionaire</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -218,7 +218,7 @@ font: 75 11pt &quot;STIXIntegralsSm&quot;;
 font-weight:bold;</string>
             </property>
             <property name="text">
-             <string>&lt;font color=yellow&gt;B:&lt;/font&gt; Otgovor</string>
+             <string/>
             </property>
             <property name="flat">
              <bool>true</bool>
