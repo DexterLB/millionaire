@@ -7,7 +7,9 @@
 #include <QSignalMapper>
 #include <QtDebug>
 #include <QTimer>
+#include <QFileDialog>
 #include <QtCore>
+#include <QDir>
 #include "question.h"
 
 namespace Ui {
