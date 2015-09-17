@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QtCore>
 #include <QDir>
+#include <QKeyEvent>
 #include "question.h"
 
 namespace Ui {
@@ -38,6 +39,9 @@ private:
     int button_id;
     void renovateColor();
     void gameOver();
+
+protected:
+    void keyPressEvent(QKeyEvent* event);
 
 private slots:
 	void clicked(int button_id);

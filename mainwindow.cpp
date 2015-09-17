@@ -111,6 +111,16 @@ void MainWindow::winGame(){
     this->startGame();
 }
 
+void MainWindow::keyPressEvent(QKeyEvent* event) {
+    switch(event->key()) {
+        case Qt::Key_A: this->clicked(0); break;
+        case Qt::Key_B: this->clicked(1); break;
+        case Qt::Key_C: this->clicked(2); break;
+        case Qt::Key_D: this->clicked(3); break;
+        default: QMainWindow::keyPressEvent(event);
+    }
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
