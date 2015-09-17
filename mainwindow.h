@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QtDebug>
+#include <QSoundEffect>
 #include <QTimer>
 #include <QFileDialog>
 #include <QtCore>
@@ -26,6 +27,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QSoundEffect select_sound;
     int question_index;
     QList<Question*> questions;
     void fillText();
@@ -33,12 +35,12 @@ private:
     int button_id;
     void renovateColor();
     void gameOver();
-    void nextQuestion();
-    void winGame();
     
 private slots:
 	void clicked(int button_id);
     void verified();
+    void nextQuestion();
+    void winGame();
 };
 
 #endif // MAINWINDOW_H

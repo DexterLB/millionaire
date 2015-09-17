@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += multimedia
+#include <QSoundEffect> е, но трябва в .pro файла
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

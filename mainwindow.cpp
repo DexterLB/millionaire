@@ -9,6 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->question_index = 0;
 
+    this->select_sound.setSource(QUrl::fromLocalFile(":/sounds/select.mp3"));
+    this->select_sound.setVolume(0.25f);
+    
     QFile file(QFileDialog::getOpenFileName(this, "Select a file to open..."));
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString line;
@@ -59,6 +62,7 @@ void MainWindow::fillText(){
 }
 
 void MainWindow::clicked(int button_id){
+    this->select_sound.play();
 	this->answers[button_id]->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
     this->button_id = button_id;
     for(int i = 0; i < 4; i++){
@@ -71,27 +75,20 @@ void MainWindow::clicked(int button_id){
 
 void MainWindow::verified() {
     this->answers[this->questions[question_index]->correct_index]->setStyleSheet(this->answers[this->questions[question_index]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
-    if(this->questions[question_index]->correct_index == button_id){
-        this->nextQuestion();
-    }else{
-        this->gameOver();
-    }
+    QTimer::singleShot(1000, this, SLOT(nextQuestion()));
 }
 
 void MainWindow::nextQuestion(){
     if(question_index >= this->questions.size() - 1){
-        this->winGame();
+        QTimer::singleShot(1000, this, SLOT(winGame()));
     } else {
         this->question_index += 1;
         fillText();
     }
 }
 
-void MainWindow::gameOver(){
-
-}
-
 void MainWindow::winGame(){
+    
 }
 
 MainWindow::~MainWindow()

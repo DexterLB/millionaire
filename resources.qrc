@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/images">
         <file alias="banner.png">images/banner.png</file>
+        <file alias="win.png">images/win.png</file>
         <file alias="button.png">images/button.png</file>
         <file alias="question.png">images/question.png</file>
         <file alias="selected.png">images/selected.png</file>
@@ -10,5 +11,9 @@
 
     <qresource prefix="/questions">
         <file alias="questions.txt">questions/questions.txt</file>
+    </qresource>
+
+    <qresource prefix="/sounds">
+        <file alias="select.mp3">sounds/select.mp3</file>
     </qresource>
 </RCC>
