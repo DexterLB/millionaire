@@ -9,10 +9,6 @@
         <file alias="background.png">images/background.png</file>
     </qresource>
 
-    <qresource prefix="/questions">
-        <file alias="questions.txt">questions/questions.txt</file>
-    </qresource>
-
     <qresource prefix="/sounds">
         <file alias="select.wav">sounds/select.wav</file>
         <file alias="wrong.wav">sounds/wrong.wav</file>

@@ -12,10 +12,35 @@ MainWindow::MainWindow(QWidget *parent) :
     this->select_sound.setSource(QUrl("qrc:/sounds/select.wav"));
     this->wrong_sound.setSource(QUrl("qrc:/sounds/wrong.wav"));
 
-    QFile file(QFileDialog::getOpenFileName(this, "Select a file to open..."));
+
+    this->answers << ui->a;
+    this->answers << ui->b;
+    this->answers << ui->c;
+    this->answers << ui->d;
+
+
+    QSignalMapper* signalMapper = new QSignalMapper(this);
+    for(int i = 0; i < 4; i++){
+    	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
+    	signalMapper->setMapping(this->answers[i], i);
+	}
+    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
+    QTimer::singleShot(0, this, SLOT(startGame()));
+}
+
+void MainWindow::startGame() {
+    QString filename = QFileDialog::getOpenFileName(this, "Select a file to open...");
+    if (filename.isNull()) {
+        qApp->exit();
+        return;
+    }
+
+    QFile file(filename);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString line;
     QTextStream in(&file);
+    in.setCodec("UTF-8");
+
     while(!in.atEnd()){
         Question* current_question = new Question;
         line = in.readLine();
@@ -30,19 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
         this->questions << current_question;
     }
 
-    this->answers << ui->a;
-    this->answers << ui->b;
-    this->answers << ui->c;
-    this->answers << ui->d;
-
     fillText();
-
-    QSignalMapper* signalMapper = new QSignalMapper(this);
-    for(int i = 0; i < 4; i++){
-    	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
-    	signalMapper->setMapping(this->answers[i], i);
-	}
-    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
 }
 
 void MainWindow::renovateColor(){

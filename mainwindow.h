@@ -41,6 +41,7 @@ private slots:
 	void clicked(int button_id);
     void verified();
     void nextQuestion();
+    void startGame();
     void winGame();
 };
 
