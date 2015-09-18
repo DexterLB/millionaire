@@ -19,18 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
     this->answers << ui->c;
     this->answers << ui->d;
 
-
-    QSignalMapper* signalMapper = new QSignalMapper(this);
+    QSignalMapper* answerMapper = new QSignalMapper(this);
     for(int i = 0; i < 4; i++){
-    	connect(this->answers[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
-    	signalMapper->setMapping(this->answers[i], i);
+    	connect(this->answers[i], SIGNAL(clicked()), answerMapper, SLOT(map()));
+    	answerMapper->setMapping(this->answers[i], i);
 	}
-    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
+    connect(answerMapper, SIGNAL(mapped(int)), this, SLOT(clicked(int)));
+
     QTimer::singleShot(0, this, SLOT(startGame()));
 }
 
 void MainWindow::startGame() {
-    QString filename = QFileDialog::getOpenFileName(this, "Select a file to open...");
+    QString filename = QFileDialog::getOpenFileName(
+        this, "Select questions file"
+    );
     if (filename.isNull()) {
         qApp->exit();
         return;
@@ -46,7 +48,7 @@ void MainWindow::startGame() {
         Question* current_question = new Question;
         line = in.readLine();
         current_question->question = line;
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++) {
             line = in.readLine();
             current_question->answers << line;
         }
@@ -56,12 +58,17 @@ void MainWindow::startGame() {
         this->questions << current_question;
     }
 
-    fillText();
+    this->fillText();
 }
 
 void MainWindow::renovateColor(){
     for(int i = 0; i < 4; i++){
-        this->answers[i]->setStyleSheet("border:none; border-image:url(:/images/button.png); color:white; font: 75 11pt \"STIXIntegralsSm\"; font-weight:bold;");
+        this->answers[i]->setStyleSheet(
+            "border:none;"
+            "border-image:url(:/images/button.png);"
+            "color:white; font: 75 11pt \"STIXIntegralsSm\";"
+            "font-weight:bold;"
+         );
         this->answers[i]->setEnabled(true);
     }
 }
@@ -77,23 +84,32 @@ void MainWindow::fillText(){
 
 void MainWindow::clicked(int button_id){
     this->select_sound.play();
-	this->answers[button_id]->setStyleSheet(ui->a->styleSheet() + "border-image:url(:/images/selected.png);");
+	this->answers[button_id]->setStyleSheet(
+        ui->a->styleSheet() + "border-image:url(:/images/selected.png);"
+    );
     this->button_id = button_id;
-    for(int i = 0; i < 4; i++){
-        if(this->button_id != i){
+    for(int i = 0; i < 4; i++) {
+        if(this->button_id != i) {
             this->answers[i]->setEnabled(false);
         }
     }
+
     QTimer::singleShot(3000, this, SLOT(verified()));
 }
 
 void MainWindow::verified() {
-    this->answers[this->questions[question_index]->correct_index]->setStyleSheet(this->answers[this->questions[question_index]->correct_index]->styleSheet() + "border-image:url(:/images/correct.png);");
-    if (this->button_id == this->questions[question_index]->correct_index) {
+    int correct_index = this->questions[question_index]->correct_index;
+    this->answers[correct_index]->setStyleSheet(
+        this->answers[correct_index]->styleSheet()
+            + "border-image:url(:/images/correct.png);"
+    );
+
+    if (this->button_id == correct_index) {
         this->right_sound.play();
     } else {
         this->wrong_sound.play();
     }
+
     QTimer::singleShot(3000, this, SLOT(nextQuestion()));
 }
 
