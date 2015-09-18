@@ -34,9 +34,10 @@ private:
     QSoundEffect right_sound;
     int question_index;
     QList<Question*> questions;
-    void fillText();
     QList<QPushButton*> answers;
     int button_id;
+    QString blank_button_stylesheet;
+    void fillText();
     void renovateColor();
     void gameOver();
 

@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->answers << ui->c;
     this->answers << ui->d;
 
+    this->blank_button_stylesheet = ui->a->styleSheet();
+
     QSignalMapper* answerMapper = new QSignalMapper(this);
     for(int i = 0; i < 4; i++){
     	connect(this->answers[i], SIGNAL(clicked()), answerMapper, SLOT(map()));
@@ -63,12 +65,7 @@ void MainWindow::startGame() {
 
 void MainWindow::renovateColor(){
     for(int i = 0; i < 4; i++){
-        this->answers[i]->setStyleSheet(
-            "border:none;"
-            "border-image:url(:/images/button.png);"
-            "color:white; font: 75 11pt \"STIXIntegralsSm\";"
-            "font-weight:bold;"
-         );
+        this->answers[i]->setStyleSheet(this->blank_button_stylesheet);
         this->answers[i]->setEnabled(true);
     }
 }
